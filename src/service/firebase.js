@@ -29,12 +29,13 @@ export const signInWithGoogle = () =>{
 }
 
 
-// export const LogOut = () =>{
-//     firebase.auth().signOut()
-//     .then(()=>{
-//         console.log('log out')
-//     })
-//     .catch((e)=>{
-//         console.log(e.message)
-//     })
-// }
+export const LogOut = () =>{
+    firebase.auth().signOut()
+    .then(()=>{
+        console.log('log out')
+        document.location.reload()
+    })
+    .catch((e)=>{
+        console.log(e.message)
+    })
+}
