@@ -31,3 +31,7 @@ export const initGet = async(uid) =>{
         return todos;
     })
 }
+
+export const todoDelete = (id) =>{
+    db.collection('todo').doc(id).delete()
+}

@@ -44,7 +44,7 @@ const DashBoard = () => {
     return(
         <div>
          {formRender()}
-         <ToDoList todos={todos}/>
+         <ToDoList todos={todos} fetch={fetch}/>
         </div>
     )
 }
