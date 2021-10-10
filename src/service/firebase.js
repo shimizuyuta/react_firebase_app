@@ -1,6 +1,7 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
 firebase.initializeApp({
     apiKey:process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,3 +15,26 @@ firebase.initializeApp({
 })
 
 
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const auth = firebase.auth();
+
+export const signInWithGoogle = () =>{
+    firebase.auth().signInWithPopup(googleProvider)
+    .then((res)=>{
+        console.log(res.user)
+    })
+    .catch((error)=>{
+        console.log('err',error.message)
+    })
+}
+
+
+// export const LogOut = () =>{
+//     firebase.auth().signOut()
+//     .then(()=>{
+//         console.log('log out')
+//     })
+//     .catch((e)=>{
+//         console.log(e.message)
+//     })
+// }
