@@ -3,6 +3,7 @@ import  { AuthContext } from '../providers/AuthProvider';
 import dig from 'object-dig'
 import { signInWithGoogle } from "../service/firebase";
 import * as Api from '../service/api'
+import ToDoList from "./ToDoList";
 
 const DashBoard = () => {
     const currentUser = useContext(AuthContext);
@@ -35,13 +36,15 @@ const DashBoard = () => {
      return dom
     }
 
-    const post = () =>{
-       Api.addTodo(inputName,currentUser.currentUser.uid)
-       setInputName('');
+    const post = async() =>{
+       await Api.addTodo(inputName,currentUser.currentUser.uid)
+       await setInputName('');
+       fetch();
     }
     return(
         <div>
          {formRender()}
+         <ToDoList todos={todos}/>
         </div>
     )
 }
