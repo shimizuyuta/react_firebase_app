@@ -2,23 +2,45 @@ import React, { useContext,useState } from 'react';
 import  { AuthContext } from '../providers/AuthProvider';
 import { signInWithGoogle,LogOut } from '../service/firebase';
 import dig from 'object-dig'
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { mergeClasses } from '@material-ui/styles';
+
+const useStyle = makeStyles(()=>({
+    Toolbar:{
+        justifyContent:'space-between'
+    },
+    button:{
+        color:'white'
+    }
+}))
+
 
 const Header = () =>{
     const currentUser = useContext(AuthContext);
     console.log(currentUser)
+    const classes = useStyle()
     const buttonRender = () =>{
         let buttonDom
         if(dig(currentUser,'currentUser','uid')){
-           buttonDom =<button onClick={LogOut}>logout</button>
+           buttonDom =<Button className={classes.button} variant='inherit' onClick={LogOut}>logout</Button>
         }else{
-           buttonDom = <button onClick={signInWithGoogle}>login</button>
+           buttonDom = <Button className={classes.button} variant='inherit' onClick={signInWithGoogle}>login</Button>
         }
         return buttonDom;
     }
     return (
-        <header>
-            {buttonRender()}
-        </header>
+        <AppBar position='static'>
+            <Toolbar className={classes.Toolbar}>
+                <Typography variant='h6'>
+                    ReactToDo
+                </Typography>
+                {buttonRender()}
+            </Toolbar>
+        </AppBar>
     )
 }
 
